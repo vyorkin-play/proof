@@ -1,0 +1,11 @@
+dist
+coverage
+docs
+tmp
+generated
+node_modules
+.env
+
+*.deb
+npm-debug.log
+yarn.lock

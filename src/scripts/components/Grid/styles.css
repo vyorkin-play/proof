@@ -1,0 +1,30 @@
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px dashed #222;
+  cursor: pointer;
+}
+
+.cell:hover {
+  background-color: #3e0f2f;
+}
+
+.enabled {
+  animation: pulsate 1s ease-out;
+  animation-iteration-count: infinite; 
+  opacity: 0.5;
+  background: #3e0f2f;
+}
+
+@keyframes pulsate {
+  0% { 
+    opacity: 0.5;
+  }
+  50% { 
+    opacity: 1.0;
+  }
+  100% { 
+    opacity: 0.5;
+  }
+}
