@@ -14,3 +14,4 @@ declare module '*.json' {
 }
 
 declare module 'redux-devtools-extension';
+declare module 're-reselect';

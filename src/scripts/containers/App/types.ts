@@ -5,8 +5,9 @@ export interface AppSelectedState extends QuotesState {}
 export interface AppState {}
 
 export interface AppActions {
+  start(): void;
   toggle(row: number, col: number): void;
-  receive(row: number, col: number, value: number): void;
+  randomize(): void;
 }
 
 export interface AppProps extends

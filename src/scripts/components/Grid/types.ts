@@ -6,6 +6,8 @@ import {
 } from 'react-virtualized';
 
 export interface GridOwnProps {
+  rowCount: number;
+  columnCount: number;
   onClick(row: number, col: number): void;
   onSectionVisible(params: SectionRenderedParams): void;
 }
@@ -26,8 +28,13 @@ export interface CellOwnProps extends GridCellProps {
   onClick(row: number, col: number): void;
 }
 
-export interface CellProps extends CellOwnProps {
+export interface CellSelectedProps {
   enabled: boolean;
-  value: string;
+  value: React.ReactText;
+}
+
+export interface CellProps extends
+  CellOwnProps,
+  CellSelectedProps {
   handleClick: React.MouseEventHandler<HTMLDivElement>;
 }

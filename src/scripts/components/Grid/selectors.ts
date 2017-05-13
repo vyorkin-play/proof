@@ -1,4 +1,6 @@
-import { createSelector } from 'reselect';
+import { equals } from 'ramda';
+import { createSelector, defaultMemoize, createSelectorCreator } from 'reselect';
+import createCachedSelector from 're-reselect';
 import { AppState } from 'modules';
 import { QuotesInputsMap, QuotesValuesMap, Position } from 'modules/quotes';
 
@@ -10,18 +12,12 @@ const selectPosition = (_state: AppState, { rowIndex, columnIndex }: CellOwnProp
   col: columnIndex,
 });
 
-const selectQuotesValues = (state: AppState) => state.quotes.values;
-const selectQuotesInputs = (state: AppState) => state.quotes.inputs;
-
-export const cellSelector = createSelector(
-  selectQuotesValues,
-  selectQuotesInputs,
-  selectPosition, (
-    values: QuotesValuesMap,
-    inputs: QuotesInputsMap,
-    { row, col }: Position,
-  ) => ({
-    enabled: Boolean((inputs[row] || {})[col]),
-    value: (values[row] || {})[col] || '*'
-  }),
-);
+export const cellSelector = createCachedSelector(
+  (_state: AppState, { rowIndex, columnIndex}: CellOwnProps) => `[${rowIndex},${columnIndex}]`,
+  ({ quotes }: AppState, { rowIndex, columnIndex}: CellOwnProps) => Boolean((quotes.inputs[rowIndex] || {})[columnIndex]),
+  ({ quotes }: AppState, { rowIndex, columnIndex}: CellOwnProps) => (quotes.values[rowIndex] || {})[columnIndex] || '*',
+  (key: string, enabled: boolean, value: string) => {
+    console.log(`${key}: ${value}`);
+    return { enabled, value };
+  },
+)((_state: AppState, { rowIndex, columnIndex }: CellOwnProps) => `${rowIndex}-${columnIndex}`);

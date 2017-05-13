@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { prop } from 'ramda';
-import * as io from 'socket.io-client';
 import { SectionRenderedParams } from 'react-virtualized';
 
-import { ReceivePayload, toggle, receive } from 'modules/quotes';
+import { ReceivePayload, start, toggle, receive, randomize } from 'modules/quotes';
 import { random } from 'lib/utils';
 import { Grid, getGridCellKey } from 'components';
 
@@ -18,21 +17,8 @@ import {
 import * as styles from './styles.css';
 
 class App extends React.PureComponent<AppProps, AppState> {
-  private socket: any;
-
   public componentDidMount() {
-    this.socket = io('http://localhost:3001');
-    this.socket.on('tick', ({ row, col, value }: ReceivePayload) => this.props.receive(row, col, value));
-  }
-
-  private toggleStart = (row: number, col: number) => {
-    if ((this.props.inputs[row] || {})[col]) {
-      this.socket.emit('stop', { row, col });
-    } else {
-      const interval = random()
-      this.socket.emit('start', { row, col, interval });
-    }
-    this.props.toggle(row, col);
+    this.props.start();
   }
 
   private handleSectionVisible = (params: SectionRenderedParams) => {
@@ -45,9 +31,14 @@ class App extends React.PureComponent<AppProps, AppState> {
     return (
       <div className={styles.app}>
         <Grid
+          rowCount={this.props.rows}
+          columnCount={this.props.cols}
           onSectionVisible={this.handleSectionVisible}
-          onClick={this.toggleStart}
+          onClick={this.props.toggle}
         />
+        <div className={styles.controls}>
+          <button onClick={this.props.randomize}>randomize</button>
+        </div>
       </div>
     );
   }
@@ -58,4 +49,4 @@ export default connect<
   AppSelectedState,
   AppActions,
   AppOwnProps
->(prop('quotes'), { toggle, receive })(App);
+>(prop('quotes'), { start, toggle, randomize })(App);

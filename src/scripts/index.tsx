@@ -5,14 +5,12 @@ import { Provider } from 'react-redux';
 import { AppContainer } from 'react-hot-loader';
 
 import { AppState } from 'modules';
+import { defaultState as quotesDefaultState } from 'modules/quotes';
 import createStore from 'store';
 import { App, AppProps } from 'containers';
 
 const initialState: AppState = {
-  quotes: {
-    inputs: {},
-    values: {},
-  },
+  quotes: quotesDefaultState,
 };
 
 const store: Store<AppState> = createStore(initialState);

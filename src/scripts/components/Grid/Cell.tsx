@@ -3,7 +3,8 @@ import * as classnames from 'classnames';
 import { connect } from 'react-redux';
 import { withHandlers, compose } from 'recompose';
 
-import { CellOwnProps, CellProps } from './types';
+import { AppState } from 'modules';
+import { CellOwnProps, CellSelectedProps, CellProps } from './types';
 import { cellSelector } from './selectors';
 import { getKey } from './utils';
 import * as styles from './styles.css';
@@ -20,7 +21,7 @@ const Cell = (props: CellProps) => (
 );
 
 export default compose<CellProps, CellOwnProps>(
-  connect(cellSelector),
+  connect<CellSelectedProps, {}, CellOwnProps>(cellSelector),
   withHandlers({
     handleClick: (props: CellOwnProps) =>
       (event: React.MouseEvent<HTMLDivElement>) => {
