@@ -17,7 +17,6 @@ export const cellSelector = createCachedSelector(
   ({ quotes }: AppState, { rowIndex, columnIndex}: CellOwnProps) => Boolean((quotes.inputs[rowIndex] || {})[columnIndex]),
   ({ quotes }: AppState, { rowIndex, columnIndex}: CellOwnProps) => (quotes.values[rowIndex] || {})[columnIndex] || '*',
   (key: string, enabled: boolean, value: string) => {
-    console.log(`${key}: ${value}`);
     return { enabled, value };
   },
 )((_state: AppState, { rowIndex, columnIndex }: CellOwnProps) => `${rowIndex}-${columnIndex}`);
