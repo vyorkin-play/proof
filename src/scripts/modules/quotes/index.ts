@@ -68,7 +68,7 @@ export const toggleAll = (inputs: QuotesInputsMap, dispatch: any) => {
 export const randomize = () => (dispatch: any, getState: any) => {
   const { quotes: { rows, cols, inputs } } = getState();
   toggleAll(inputs, dispatch);
-  const nextInputs = times(() => times(() => random() % 112 === 0, cols), rows);
+  const nextInputs = times(() => times(() => random() % 17 === 0, cols), rows);
   toggleAll(nextInputs, dispatch);
   dispatch(randomizeData(nextInputs));
 };

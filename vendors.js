@@ -1,6 +1,7 @@
 require('classnames');
 require('reselect');
 require('re-reselect');
+require('reselect-map');
 require('react');
 require('react-dom');
 require('redux');
