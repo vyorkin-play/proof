@@ -13,10 +13,7 @@ const selectPosition = (_state: AppState, { rowIndex, columnIndex }: CellOwnProp
 });
 
 export const cellSelector = createCachedSelector(
-  (_state: AppState, { rowIndex, columnIndex}: CellOwnProps) => `[${rowIndex},${columnIndex}]`,
   ({ quotes }: AppState, { rowIndex, columnIndex}: CellOwnProps) => Boolean((quotes.inputs[rowIndex] || {})[columnIndex]),
   ({ quotes }: AppState, { rowIndex, columnIndex}: CellOwnProps) => (quotes.values[rowIndex] || {})[columnIndex] || '*',
-  (key: string, enabled: boolean, value: string) => {
-    return { enabled, value };
-  },
+  (enabled: boolean, value: string) => ({ enabled, value }),
 )((_state: AppState, { rowIndex, columnIndex }: CellOwnProps) => `${rowIndex}-${columnIndex}`);

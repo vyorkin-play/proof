@@ -6,7 +6,7 @@ require('react');
 require('react-dom');
 require('redux');
 require('react-redux');
-require('redux-logger');
+// require('redux-logger');
 require('react-virtualized');
 require('recompose');
 require('ramda');

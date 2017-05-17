@@ -79,7 +79,7 @@
     "postcss-svg": "^1.0.6",
     "progress-bar-webpack-plugin": "^1.9.3",
     "pug": "^2.0.0-beta.12",
-    "pug-loader": "pugjs/pug-loader",
+    "pug-loader": "^2.3.0",
     "raw-loader": "^0.5.1",
     "react-hot-loader": "^3.0.0-beta.6",
     "source-map-loader": "^0.2.1",
