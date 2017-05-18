@@ -85,6 +85,8 @@
     "source-map-loader": "^0.2.1",
     "style-loader": "^0.16.1",
     "ts-loader": "^2.0.3",
+    "tslint": "^5.2.0",
+    "tslint-config-airbnb": "^5.0.1",
     "typed-css-modules": "vyorkin-forks/typed-css-modules",
     "url-loader": "^0.5.8",
     "webpack": "^2.4.1",

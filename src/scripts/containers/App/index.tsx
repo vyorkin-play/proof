@@ -27,6 +27,10 @@ class App extends React.PureComponent<AppProps, AppState> {
     // - subscribe to visible
   }
 
+  private shouldComponentUpdate(nextProps: AppProps, nextState: AppState) {
+    return false;
+  }
+
   public render() {
     return (
       <div className={styles.app}>
